@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app='app'>
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+  </script>
+</head>
+<style type="text/css">
+</style>
+<body>
+  <div ng-controller="mainCtrl">
+    <canvas id="myChart" width="400" height="200" ng-show="graphMode"></canvas>
+    <div ng-show="!graphMode">
+      <p>Добавить валюту</p>
+      <select ng-model="currencyToAdd">
+        <option value="145">USD</option>
+        <option value="292">EUR</option>
+        <option value="298">RUB</option>
+      </select>
+      <button ng-click="addCurrencyRow(currencyToAdd)">Добавить</button>
+    </div>
+
+    <table id="table" ng-show="!graphMode">
+      <tr>
+        <th type="date">Datex</th>
+        <th ng-repeat="item in currencyTable">{{item.currency | currencyLabel}} <button class="remove-btn" ng-click="removeCurrencyRow($index)" ></button ></th>
+      </tr>
+      <tr ng-repeat="row in table track by $index">
+      <td ng-repeat="td in row track by $index">{{td}}</td>
+      </tr>
+    </table>
+
+    <br>
+    <span ng-if="graphMode">
+      <select class="dropdown" ng-model="currency" ng-change="drawData(currency);">
+        <option value="145">USD</option>
+        <option value="292">EUR</option>
+        <option value="298">RUB</option>
+      </select>
+      <input type="date" ng-model="date.start" ng-change="drawData(currency)">
+      <input type="date" ng-model="date.end" ng-change="drawData(currency)">
+    </span>
+    <button ng-click="graphMode = !graphMode; currencyTable = []; addCurrencyRow(currency)">сменить режим</button>
+    <button ng-show="!graphMode" onclick="exportTableToCSV('nbrb.csv')">Export HTML Table To CSV File</button>
+  </div>
+</body>
+<script src="assets/js/table.js"></script>
+</html>

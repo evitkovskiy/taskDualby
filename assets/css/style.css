@@ -1,0 +1,16 @@
+.remove-btn{
+	height: 15px;
+	width: 15px;
+	position: relative;
+}
+.remove-btn:before{
+	content: '';
+	display: block;
+	box-sizing: border-box;
+	position: absolute;
+	top: 4px;
+	left: 1px;
+	height: 3px;
+	width: 11px;
+	background-color: #000;
+}

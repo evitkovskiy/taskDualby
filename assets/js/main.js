@@ -44,7 +44,7 @@ class MainCtrl{
 			let startDate = formatDate($scope.date.start);
 			let endDate = formatDate($scope.date.end);
 
-			return $http.get('http://www.nbrb.by/API/ExRates/Rates/Dynamics/' + currency +
+			return $http.get('https://www.nbrb.by/API/ExRates/Rates/Dynamics/' + currency +
 				'?startDate=' + startDate + '&endDate=' + endDate).then(
 				(successRes) => {
 					return successRes.data;
